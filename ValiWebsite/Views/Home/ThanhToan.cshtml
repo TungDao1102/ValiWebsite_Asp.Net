@@ -1,0 +1,80 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "ThanhToan";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head runat="server">
+    <title>VNPAY DEMO</title>
+    <link href="Styles/bootstrap.min.css" rel="stylesheet" />
+	<style>
+.card{
+    background-color:#dce3f0;
+}
+
+.height{
+    
+    height:100vh;
+}
+.form-group {
+    justify-content: center;
+  
+}
+
+.text-muted {
+    margin-bottom: 20%;
+    text-align: center;
+        }
+.card{
+    
+    width:350px;
+    height:370px;
+}
+
+.btn-danger {
+    height: 48px;
+    font-size: 18px;
+}
+    </style>
+</head>
+<body>
+
+    <div class="height d-flex justify-content-center align-items-center">
+
+        <div class="card p-3">
+
+            <div class="d-flex justify-content-between align-items-center ">
+                <div class="mt-2">
+                    <div class="container">
+        <div class="header clearfix">
+            <h3 class="text-muted">Thanh Toán</h3>
+        </div>
+        <div class="form-group" >
+                            <button onclick="pay()" class="btn btn-danger">Giao dịch thanh toán</button><br>
+        </div>
+        <div class="form-group">
+							<button onclick="querydr()" class="btn btn-danger">Truy vấn giao dịch</button><br>
+        </div>
+        <div class="form-group">
+                            <button onclick="refund()" class="btn btn-danger">Hoàn tiền giao dịch</button><br>
+        </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </div> 
+    </div>
+    <script>
+        function pay() {
+            window.location.href = "/Home/GiaoDichThanhToan";
+        }
+        function querydr() {
+            window.location.href = "/vnpay_querydr.aspx";
+        }
+        function refund() {
+            window.location.href = "/vnpay_refund.aspx";
+        }
+    </script>
+</body>
+

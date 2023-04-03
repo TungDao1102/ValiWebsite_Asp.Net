@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TLoaiSp>
+<div class="col-lg-3">
+	<div class="hero__categories">
+		<div class="hero__categories__all">
+			<i class="fa fa-bars"></i>
+			<span>All departments</span>
+		</div>
+		<ul>
+			@foreach(var item in Model)
+			{
+				var url = "https://localhost:7265/api/productapi/"+item.MaLoai;
+				<li>
+					<a style="cursor:pointer" onclick="showProductByCategory('@url')">
+						@item.Loai
+					</a>
+					</li>
+				@*<li><a asp-controller="Home" asp-action="SanPhamTheoLoai" asp-route-maloai="@item.MaLoai">@item.Loai</a></li>*@
+			}
+		</ul>
+	</div>
+</div>
+<script>
+	function showProductByCategory(getUrl) {
+		var str = "";
+		$.ajax({
+			url: getUrl,
+			type: "GET",
+			dataType: "json",
+			success: function (data) {
+				$.each(data, function (key, val) {
+					str += `<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+			<div class="featured__item">
+					<div class="featured__item__pic set-bg" data-setbg='../ProductImages/${val.anhDaiDien}'
+				style="background-image: url('../Images/${val.anhDaiDien}');">
+					<ul class="featured__item__pic__hover">
+						<li><a href="#"><i class="fa fa-heart"></i></a></li>
+						<li><a href="#"><i class="fa fa-retweet"></i></a></li>
+						<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+					</ul>
+				</div>
+				<div class="featured__item__text">
+					<h6><a asp-controller="Home" asp-action="ChiTietSanPham" asp-route-MaSp="${val.maSp}">${val.tenSp}</a></h6>
+					<h5>${val.giaNhoNhat} đồng</h5>
+				</div>
+			</div>
+		</div>`
+				});
+				$("#displayProducts").html(str);
+			},
+				Error: function(err) {
+				alert(err.responseText);
+			}
+		});
+	}
+	</script>
