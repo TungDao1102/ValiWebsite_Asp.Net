@@ -15,7 +15,10 @@ namespace ValiWebsite.Areas.Admin.Controllers
         {
             return View();
         }
-
+        public IActionResult Login()
+        {
+            return View();
+        }
       //  [Route("DanhMucSanPham")]
         public IActionResult DanhMucSanPham(int? page)
         {
@@ -72,7 +75,7 @@ namespace ValiWebsite.Areas.Admin.Controllers
             return View(sp);
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult XoaSanPham(string masp)
         {
             TempData["Message"] = "";
@@ -82,11 +85,12 @@ namespace ValiWebsite.Areas.Admin.Controllers
                 TempData["Message"] = "Không thể xóa sản phẩm này vì đã có trong đơn hàng";
                 return RedirectToAction("DanhMucSanPham", "HomeAdmin");
             }
+            TempData["Message"] = "" + chiTietSanPhams.Count();
             var anhSanPhams = db.TAnhSps.Where(x => x.MaSp == masp);
             if(anhSanPhams.Any()) db.RemoveRange(anhSanPhams);
             db.Remove(db.TDanhMucSps.Find(masp));
             db.SaveChanges();
-            TempData["Message"] = "Deleted";
+         //   TempData["Message"] = "Deleted";
             return RedirectToAction("DanhMucSanPham");
         }
        

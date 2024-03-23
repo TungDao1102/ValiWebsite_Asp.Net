@@ -27,15 +27,15 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthentication();
 app.UseSession();
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllerRoute(
+    app.MapControllerRoute(
       name: "Admin",
       pattern: "{area:exists}/{controller=HomeAdmin}/{action=Index}/{id?}"
     );
-	endpoints.MapControllerRoute(
+	app.MapControllerRoute(
 	 name: "Test",
 	 pattern: "{area:exists}/{controller=Test}/{action=Index}/{id?}"
    );
